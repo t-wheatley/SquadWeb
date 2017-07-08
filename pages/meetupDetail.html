@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>meetupDetail</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="../config.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: firebaseConfig.apiKey,
+            authDomain: firebaseConfig.authDomain,
+            databaseURL: firebaseConfig.databaseURL,
+            projectId: firebaseConfig.projectId,
+            storageBucket: firebaseConfig.storageBucket,
+            messagingSenderId: firebaseConfig.messagingSenderId
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="../js/meetupDetail.js"></script>
+
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div id="nav-placeholder"></div>
+
+<script>
+    $(function () {
+        $("#nav-placeholder").load("navigation.html");
+    });
+</script>
+
+<!-- Meetup Title -->
+<div class="row text-center">
+    <h1 id="name-field">Meetup</h1>
+</div>
+
+<!-- Meetup Picture -->
+<div class="row">
+    <div class="container">
+        <img src="https://firebasestorage.googleapis.com/v0/b/squad-c15ba.appspot.com/o/meetups%2F-KkLiIDxovOGIzH8iD5G.jpg?alt=media&token=aea0e76e-010c-40da-bbe1-6bc16479b8fd"
+             class="img-responsive img-rounded center-block">
+    </div>
+</div>
+
+
+<!-- Meetup Info Container -->
+<div class="container text-center top30">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Meetup Info:</h3>
+        </div>
+        <table class="table" id="info-table">
+            <tbody>
+            <tr>
+                <td>Squad:</td>
+            </tr>
+            <tr>
+                <td id="squad-field">Squad.</td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+            </tr>
+            <tr>
+                <td id="status-field">Status.</td>
+            </tr>
+            <tr>
+                <td>Start Date:</td>
+            </tr>
+            <tr>
+                <td id="start-field">Start Date.</td>
+            </tr>
+            <tr>
+                <td>End Date:</td>
+            </tr>
+            <tr>
+                <td id="end-field">End Date.</td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+            </tr>
+            <tr>
+                <td id="description-field">Description.</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+            </tr>
+            <tr>
+                <td id="address-field">Address.</td>
+            </tr>
+            <tr>
+                <td>Host:</td>
+            </tr>
+            <tr>
+                <td id="host-field">Host.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
