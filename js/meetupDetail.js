@@ -42,7 +42,7 @@ var loadMeetup = function (meetupId) {
 
         // Filling the fields with their data
         $("#name-field").text(name);
-        $("#status-field").text(status);
+        $("#status-field").text(convertStatus(status));
         $("#start-field").text(unixToDate(start));
         $("#end-field").text(unixToDate(end));
         $("#description-field").text(description);
@@ -115,4 +115,18 @@ var addressBuilder = function (address1, address2, townCity, county, postCode) {
     return tempAddress;
 }
 
+// Function to convert the status number into a readable status
+var convertStatus = function (intStatus) {
+    if(intStatus === 0){
+        return "Upcoming";
+    } else if (intStatus === 1){
+        return "Ongoing";
+    } else if (intStatus === 2){
+        return "Expired";
+    } else {
+        return "Deleted";
+    }
+}
+
+// Runs the main when the document is ready
 $(document).ready(main);
