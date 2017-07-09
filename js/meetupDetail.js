@@ -17,14 +17,19 @@ var main = function () {
     // Testing the javascript is being run
     document.title = "lil pump ouu"
 
-    $("#meetupDetail").addClass("active");
+
 
     // Test meetupId
-    meetupId = "-KkLiIDxovOGIzH8iD5G"
+    meetupId = getParameterByName("meetupId")
+    //"-KkLiIDxovOGIzH8iD5G"
 
     // Starts the loading chain
     // loadMeetup -> loadSquadName -> loadHostName -> loadPicture -> loadUsers
-    loadMeetup(meetupId);
+    if (meetupId !== null) {
+        loadMeetup(meetupId);
+    } else {
+        window.alert("Something went wrong!");
+    }
 }
 
 // Function to load the Meetup's data
@@ -32,30 +37,35 @@ var loadMeetup = function (meetupId) {
 
     var detailsRef = database.ref("/meetups/" + meetupId);
     detailsRef.once("value").then(function (snapshot) {
-        var name = snapshot.val().name;
-        //var picture = snapshot.val().;
-        squadId = snapshot.val().squad;
-        var status = snapshot.val().name;
-        var start = snapshot.val().startDateTime;
-        var end = snapshot.val().endDateTime;
-        var description = snapshot.val().description;
-        var address1 = snapshot.val().address1;
-        var address2 = snapshot.val().address2;
-        var townCity = snapshot.val().townCity;
-        var county = snapshot.val().county;
-        var postCode = snapshot.val().postCode;
-        hostId = snapshot.val().host;
 
-        // Filling the fields with their data
-        $("#name-field").text(name);
-        $("#status-field").text(convertStatus(status));
-        $("#start-field").text(unixToDate(start));
-        $("#end-field").text(unixToDate(end));
-        $("#description-field").text(description);
-        $("#address-field").text(addressBuilder(address1, address2, townCity, county, postCode));
+        // If no Meetup with the requested Id exists
+        if (snapshot.val() === null) {
+            window.alert("No Meetup with that ID")
+        } else {
+            var name = snapshot.val().name;
+            squadId = snapshot.val().squad;
+            var status = snapshot.val().status;
+            var start = snapshot.val().startDateTime;
+            var end = snapshot.val().endDateTime;
+            var description = snapshot.val().description;
+            var address1 = snapshot.val().address1;
+            var address2 = snapshot.val().address2;
+            var townCity = snapshot.val().townCity;
+            var county = snapshot.val().county;
+            var postCode = snapshot.val().postCode;
+            hostId = snapshot.val().host;
 
-        // Load the name of the Squad
-        loadSquadName();
+            // Filling the fields with their data
+            $("#name-field").text(name);
+            $("#status-field").text(convertStatus(status));
+            $("#start-field").text(unixToDate(start));
+            $("#end-field").text(unixToDate(end));
+            $("#description-field").text(description);
+            $("#address-field").text(addressBuilder(address1, address2, townCity, county, postCode));
+
+            // Load the name of the Squad
+            loadSquadName();
+        }
     });
 }
 
@@ -93,18 +103,18 @@ var loadHostName = function () {
 
 // Function to load the Meetup's picture
 var loadPicture = function () {
+    // Reference for where the picture should be stored
     var pictureRef = storage.ref("meetups/" + meetupId + ".jpg");
 
     // Get the download URL
     pictureRef.getDownloadURL().then(function (url) {
+
         // Displaying the image for the Meetup
         var img = document.getElementById('meetup-image');
         img.src = url;
         $("#meetup-image").removeClass("hidden");
-    }).catch(function (error) {
 
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
+    }).catch(function (error) {
         switch (error.code) {
             case 'storage/object_not_found':
                 $("#meetup-image").hide();
@@ -124,6 +134,7 @@ var loadPicture = function () {
                 break;
         }
     });
+
 }
 
 // Function to convert UNIX DatTime to a readable string
@@ -168,6 +179,17 @@ var convertStatus = function (intStatus) {
     } else {
         return "Deleted";
     }
+}
+
+// Function to get a paramater from the URL
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 // Runs the main when the document is ready
