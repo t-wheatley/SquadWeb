@@ -12,17 +12,20 @@ var meetupId;
 var squadId;
 var hostId;
 var users;
+var pressed = false;
 
 // Main to be run once the page is ready
 var main = function () {
     // Testing the javascript is being run
     document.title = "lil pump ouu"
 
+    // Initialising the attend button
+    $("#attend-btn").click(function () {
+        attendMeetup();
+    })
 
-
-    // Test meetupId
+    // Get the meetupId from the URL
     meetupId = getParameterByName("meetupId")
-    //"-KkLiIDxovOGIzH8iD5G"
 
     // Starts the loading chain
     // loadMeetup -> loadSquadName -> loadHostName -> loadPicture -> loadUsers
@@ -143,9 +146,6 @@ var loadPicture = function () {
 // Function to load the amount of users attending the Meetup
 var loadUsers = function () {
     if(users !== null) {
-
-        console.log(users)
-
         var usersSize = Object.keys(users).length;
         $("#attending-field").text(usersSize);
     }
@@ -204,6 +204,26 @@ function getParameterByName(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+var attendMeetup = function () {
+    if (pressed === false) {
+        $("#attend-btn").text("Un-attend");
+
+        pressed = true;
+
+        var userCount = parseInt($("#attending-field").text());
+
+        $("#attending-field").text(userCount + 1);
+    } else {
+        $("#attend-btn").text("Attend");
+
+        pressed = false;
+
+        var userCount = parseInt($("#attending-field").text());
+
+        $("#attending-field").text(userCount - 1);
+    }
 }
 
 // Runs the main when the document is ready
