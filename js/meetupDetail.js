@@ -11,6 +11,7 @@ var storage = firebase.storage();
 var meetupId;
 var squadId;
 var hostId;
+var users;
 
 // Main to be run once the page is ready
 var main = function () {
@@ -40,10 +41,9 @@ var loadMeetup = function (meetupId) {
 
         // If no Meetup with the requested Id exists
         if (snapshot.val() === null) {
-            window.alert("No Meetup with that ID")
+            $(".alert").removeClass("hidden");
         } else {
             var name = snapshot.val().name;
-            squadId = snapshot.val().squad;
             var status = snapshot.val().status;
             var start = snapshot.val().startDateTime;
             var end = snapshot.val().endDateTime;
@@ -53,6 +53,8 @@ var loadMeetup = function (meetupId) {
             var townCity = snapshot.val().townCity;
             var county = snapshot.val().county;
             var postCode = snapshot.val().postCode;
+            users = snapshot.val().users;
+            squadId = snapshot.val().squad;
             hostId = snapshot.val().host;
 
             // Filling the fields with their data
@@ -135,6 +137,18 @@ var loadPicture = function () {
         }
     });
 
+    loadUsers();
+}
+
+// Function to load the amount of users attending the Meetup
+var loadUsers = function () {
+    if(users !== null) {
+
+        console.log(users)
+
+        var usersSize = Object.keys(users).length;
+        $("#attending-field").text(usersSize);
+    }
 }
 
 // Function to convert UNIX DatTime to a readable string

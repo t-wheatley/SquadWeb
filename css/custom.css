@@ -41,7 +41,15 @@ h1 { color: #ffffff }
     color: #000000;
 }
 
+.alert {
+    border-radius: 0 !important;
+}
+
 /* Nav Bar Colors */
+.navbar {
+    margin-bottom: 0;
+}
+
 .navbar-default {
     background-color: #00897b;
     border-color: #4ebaaa;
