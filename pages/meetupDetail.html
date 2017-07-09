@@ -5,6 +5,7 @@
     <title>meetupDetail</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/custom.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
     <script src="../config.js"></script>
@@ -30,7 +31,9 @@
 
 <script>
     $(function () {
-        $("#nav-placeholder").load("navigation.html");
+        $("#nav-placeholder").load("navigation.html", function () {
+            $("#nav-meetupDetail").addClass("active");
+        });
     });
 </script>
 
@@ -43,7 +46,7 @@
 <div class="row">
     <div class="container">
         <img id="meetup-image" src=http://english.tw/wp-content/themes/qaengine/img/default-thumbnail.jpg
-             class="img-responsive img-rounded center-block hide">
+             class="img-responsive img-rounded center-block hidden">
     </div>
 </div>
 
@@ -57,47 +60,67 @@
         <table class="table" id="info-table">
             <tbody>
             <tr>
-                <td>Squad:</td>
+                <td class="panel-secondary">Squad:</td>
             </tr>
             <tr>
-                <td id="squad-field">Loading...</td>
+                <td id="squad-field" class="panel-info">Loading...</td>
             </tr>
             <tr>
-                <td>Status:</td>
+                <td class="panel-secondary">Status:</td>
             </tr>
             <tr>
-                <td id="status-field">Loading...</td>
+                <td id="status-field" class="panel-info">Loading...</td>
             </tr>
             <tr>
-                <td>Start Date:</td>
+                <td class="panel-secondary">Start Date:</td>
             </tr>
             <tr>
-                <td id="start-field">Loading...</td>
+                <td id="start-field" class="panel-info">Loading...</td>
             </tr>
             <tr>
-                <td>End Date:</td>
+                <td class="panel-secondary">End Date:</td>
             </tr>
             <tr>
-                <td id="end-field">Loading...</td>
+                <td id="end-field" class="panel-info">Loading...</td>
             </tr>
             <tr>
-                <td>Description:</td>
+                <td class="panel-secondary">Description:</td>
             </tr>
             <tr>
-                <td id="description-field">Loading...</td>
+                <td id="description-field" class="panel-info">Loading...</td>
             </tr>
             <tr>
-                <td>Address:</td>
+                <td class="panel-secondary">Address:</td>
             </tr>
             <tr>
-                <td id="address-field">Loading...</td>
+                <td id="address-field" class="panel-info">Loading...</td>
             </tr>
             <tr>
-                <td>Host:</td>
+                <td class="panel-secondary">Host:</td>
             </tr>
             <tr>
-                <td id="host-field">Loading...</td>
+                <td id="host-field" class="panel-info">Loading...</td>
             </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Attending Info Container -->
+<div class="container text-center top30">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">People Attening</h3>
+        </div>
+        <table class="table" id="user-table">
+            <tbody>
+            <tr>
+                <td class="panel-secondary">Attending:</td>
+            </tr>
+            <tr>
+                <td id="attending-field" class="panel-info">Loading...</td>
+            </tr>
+
             </tbody>
         </table>
     </div>

@@ -17,6 +17,8 @@ var main = function () {
     // Testing the javascript is being run
     document.title = "lil pump ouu"
 
+    $("#meetupDetail").addClass("active");
+
     // Test meetupId
     meetupId = "-KkLiIDxovOGIzH8iD5G"
 
@@ -98,7 +100,7 @@ var loadPicture = function () {
         // Displaying the image for the Meetup
         var img = document.getElementById('meetup-image');
         img.src = url;
-        $("#meetup-image").removeClass("hide");
+        $("#meetup-image").removeClass("hidden");
     }).catch(function (error) {
 
         // A full list of error codes is available at
