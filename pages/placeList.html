@@ -13,8 +13,10 @@
     <div id="nav-placeholder"></div>
 
     <script>
-        $(function(){
-            $("#nav-placeholder").load("navigation.html");
+        $(function () {
+            $("#nav-placeholder").load("navigation.html", function () {
+                $("#nav-placeList").addClass("active");
+            });
         });
     </script>
     <!--end of Navigation bar-->
