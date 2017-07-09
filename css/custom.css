@@ -16,10 +16,15 @@
 .bottom30 { margin-bottom:30px; }
 
 /* Background */
-body { background: #212121 !important;}
+body {
+    background: #212121 !important;
+    padding-bottom: 10px;
+}
 
 /* Text */
-h1 { color: #ffffff }
+h1 {
+    color: #ffffff !important;
+}
 
 /* Panel */
 .panel > .panel-heading {
@@ -41,7 +46,26 @@ h1 { color: #ffffff }
     color: #000000;
 }
 
+/* Buttons */
+.btn-primary {
+    background-color: #00897b;
+}
+
+.btn-primary:focus, .btn-primary:active, .btn-primary:hover  {
+    background-color: #4ebaaa !important;
+    outline: none !important;
+}
+
+/* Alert */
+.alert {
+    border-radius: 0 !important;
+}
+
 /* Nav Bar Colors */
+.navbar {
+    margin-bottom: 0;
+}
+
 .navbar-default {
     background-color: #00897b;
     border-color: #4ebaaa;
