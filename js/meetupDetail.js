@@ -2,6 +2,12 @@
  * Created by Tom on 08/07/2017.
  */
 
+/**
+* TODO:
+* Make Attend Button work
+* Display the users attending
+**/
+
 // Global Stuff
 // Firebase Database
 var database = firebase.database();
@@ -16,9 +22,6 @@ var pressed = false;
 
 // Main to be run once the page is ready
 var main = function () {
-    // Testing the javascript is being run
-    document.title = "lil pump ouu"
-
     // Initialising the attend button
     $("#attend-btn").click(function () {
         attendMeetup();
@@ -29,10 +32,12 @@ var main = function () {
 
     // Starts the loading chain
     // loadMeetup -> loadSquadName -> loadHostName -> loadPicture -> loadUsers
-    if (meetupId !== null) {
+    if (meetupId !== null && meetupId !== "") {
+
         loadMeetup(meetupId);
     } else {
-        window.alert("Something went wrong!");
+        $(".alert").removeClass("hidden");
+        $("#error-field").text("There is not Meetup ID in the URL!")
     }
 }
 
@@ -45,6 +50,7 @@ var loadMeetup = function (meetupId) {
         // If no Meetup with the requested Id exists
         if (snapshot.val() === null) {
             $(".alert").removeClass("hidden");
+            $("#error-field").text("There is no Meetup available with the ID!")
         } else {
             var name = snapshot.val().name;
             var status = snapshot.val().status;
@@ -61,6 +67,7 @@ var loadMeetup = function (meetupId) {
             hostId = snapshot.val().host;
 
             // Filling the fields with their data
+            document.title = name;
             $("#name-field").text(name);
             $("#status-field").text(convertStatus(status));
             $("#start-field").text(unixToDate(start));

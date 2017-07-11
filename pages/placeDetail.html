@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Squads!</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="../config.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: firebaseConfig.apiKey,
+            authDomain: firebaseConfig.authDomain,
+            databaseURL: firebaseConfig.databaseURL,
+            projectId: firebaseConfig.projectId,
+            storageBucket: firebaseConfig.storageBucket,
+            messagingSenderId: firebaseConfig.messagingSenderId
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="../js/placeDetail.js"></script>
+
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div id="nav-placeholder"></div>
+
+<script>
+    $(function () {
+        $("#nav-placeholder").load("navigation.html", function () {
+            $("#nav-meetupDetail").addClass("active");
+        });
+    });
+</script>
+
+<div class="alert alert-danger hidden" role="alert">
+    <strong>Oh snap!</strong> There doesnt appear to be a Meetup with that ID! <a href="javascript:history.back()" class="alert-link">Take me back!</a>
+</div>
+
+<!-- Meetup Title -->
+<div class="row text-center">
+    <h1 id="name-field">Loading...</h1>
+</div>
+
+<!-- Meetup Picture -->
+<div class="row">
+    <div class="container">
+        <img id="meetup-image" src=http://english.tw/wp-content/themes/qaengine/img/default-thumbnail.jpg
+             class="img-responsive img-rounded center-block hidden">
+    </div>
+</div>
+
+</body>
+</html>
